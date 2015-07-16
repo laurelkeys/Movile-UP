@@ -3,11 +3,15 @@ package com.movile.up.seriestracker.activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.movile.up.seriestracker.R;
+import com.movile.up.seriestracker.interfaces.OnOperationListener;
+import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetails;
+import com.movile.up.seriestracker.model.Episode;
 
 
-public class EpisodeDetailsActivity extends ActionBarActivity {
+public class EpisodeDetailsActivity extends ActionBarActivity implements OnOperationListener<Episode>{
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
 
@@ -15,6 +19,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
+        new FetchLocalEpisodeDetails(this, this).execute();
         Log.d(TAG, "onCreate()");
     }
 
@@ -64,5 +69,12 @@ public class EpisodeDetailsActivity extends ActionBarActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(TAG, "onRestoreInstanceState()");
+    }
+
+    @Override
+    public void onOperationSuccess(Episode episode) {
+        ((TextView) findViewById(R.id.episode_details_title)).setText(episode.title());
+        ((TextView) findViewById(R.id.episode_details_first_aired)).setText(episode.firstAired());
+        ((TextView) findViewById(R.id.episode_details_overview)).setText(episode.overview());
     }
 }

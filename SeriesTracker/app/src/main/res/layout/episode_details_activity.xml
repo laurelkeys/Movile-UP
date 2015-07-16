@@ -58,6 +58,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:id="@+id/episode_details_first_aired"
                             android:gravity="center_vertical"
                             android:text="14/07/2015 at 11:53"
                             android:textSize="@dimen/default_textSize_medium"
@@ -91,6 +92,7 @@
                          <TextView
                              android:layout_width="match_parent"
                              android:layout_height="match_parent"
+                             android:id="@+id/episode_details_overview"
                              android:text="xptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxpto"
                              android:textSize="@dimen/default_textSize_medium"
                              android:textColor="@color/default_textColor_fourth" />
