@@ -6,12 +6,12 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.interfaces.OnOperationListener;
-import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetails;
+import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetailsLoaderCallback;
+import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
 
 
-public class EpisodeDetailsActivity extends ActionBarActivity implements OnOperationListener<Episode>{
+public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpisodeDetailsListener<Episode> {
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
 
@@ -19,7 +19,10 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnOpera
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
-        new FetchLocalEpisodeDetails(this, this).execute();
+        getLoaderManager().initLoader(
+                0, null, new FetchLocalEpisodeDetailsLoaderCallback(this, this,
+                        "https://api-v2launch.trakt.tv/shows/game-of-thrones/seasons/5/episodes/1?extended=full,images")
+        ).forceLoad();
         Log.d(TAG, "onCreate()");
     }
 
@@ -72,7 +75,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnOpera
     }
 
     @Override
-    public void onOperationSuccess(Episode episode) {
+    public void onEpisodeDetailsSuccess(Episode episode) {
         ((TextView) findViewById(R.id.episode_details_title)).setText(episode.title());
         ((TextView) findViewById(R.id.episode_details_first_aired)).setText(episode.firstAired());
         ((TextView) findViewById(R.id.episode_details_overview)).setText(episode.overview());
