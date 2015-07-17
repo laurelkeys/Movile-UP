@@ -3,12 +3,15 @@ package com.movile.up.seriestracker.activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetailsLoaderCallback;
 import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
+import com.movile.up.seriestracker.retrofit.FetchLocalEpisodeDetailsRetrofit;
 import com.movile.up.seriestracker.util.FormatUtil;
 
 
@@ -20,10 +23,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
-        getLoaderManager().initLoader(
-                0, null, new FetchLocalEpisodeDetailsLoaderCallback(this, this,
-                        FormatUtil.formatEpisodeUrl(this, "breaking-bad", "5", "1"))
-        ).forceLoad();
+        new FetchLocalEpisodeDetailsRetrofit(this, this).loadEpisode("breaking-bad", 5l, 1l);
         Log.d(TAG, "onCreate()");
     }
 
@@ -80,5 +80,11 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
         ((TextView) findViewById(R.id.episode_details_title)).setText(episode.title());
         ((TextView) findViewById(R.id.episode_details_first_aired)).setText(episode.firstAired());
         ((TextView) findViewById(R.id.episode_details_overview)).setText(episode.overview());
+        Glide
+                .with(this)
+                .load(episode.images().screenshot().get("full"))
+                .placeholder(R.drawable.highlight_placeholder)
+                .centerCrop()
+                .into((ImageView)findViewById(R.id.highlight_placeholder));
     }
 }
