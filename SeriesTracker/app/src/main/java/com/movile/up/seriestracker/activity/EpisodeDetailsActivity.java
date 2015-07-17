@@ -9,13 +9,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetailsLoaderCallback;
+import com.movile.up.seriestracker.interfaces.EpisodeDetailsView;
 import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
+import com.movile.up.seriestracker.presenter.EpisodeDetailsPresenter;
 import com.movile.up.seriestracker.retrofit.FetchLocalEpisodeDetailsRetrofit;
 import com.movile.up.seriestracker.util.FormatUtil;
 
 
-public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpisodeDetailsListener<Episode> {
+public class EpisodeDetailsActivity extends ActionBarActivity implements EpisodeDetailsView {
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
 
@@ -23,8 +25,8 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
-        new FetchLocalEpisodeDetailsRetrofit(this, this).loadEpisode("breaking-bad", 5l, 1l);
-        Log.d(TAG, "onCreate()");
+        new EpisodeDetailsPresenter(this, this).loadRemoteEpisodeWithRetrofit();
+       Log.d(TAG, "onCreate()");
     }
 
     @Override
@@ -76,7 +78,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
     }
 
     @Override
-    public void onEpisodeDetailsSuccess(Episode episode) {
+    public void displayEpisode(Episode episode) {
         ((TextView) findViewById(R.id.episode_details_title)).setText(episode.title());
         ((TextView) findViewById(R.id.episode_details_first_aired)).setText(episode.firstAired());
         ((TextView) findViewById(R.id.episode_details_overview)).setText(episode.overview());

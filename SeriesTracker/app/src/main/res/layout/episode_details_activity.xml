@@ -29,14 +29,14 @@
                     android:layout_height="match_parent"
                     android:id="@+id/episode_details_title"
                     android:layout_alignBottom="@id/highlight_placeholder"
-                    android:text="Sample Text"
+                    android:text="No Internet Access"
                     android:textSize="@dimen/default_textSize_veryLarge"
                     android:textColor="@color/default_background_second"
                     android:layout_margin="@dimen/default_spacing_large"/>
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/default_spacing_large">
                 <android.support.v7.widget.CardView
@@ -44,7 +44,8 @@
                     card_view:cardCornerRadius="@dimen/default_spacing_verySmall"
                     android:layout_marginBottom="@dimen/default_spacing_small"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    card_view:cardUseCompatPadding="true">
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -69,9 +70,10 @@
                      xmlns:card_view="http://schemas.android.com/apk/res-auto"
                      card_view:cardCornerRadius="@dimen/default_spacing_verySmall"
                      card_view:contentPadding="@dimen/default_spacing_large"
+                     card_view:cardUseCompatPadding="true"
                      android:layout_marginTop="@dimen/default_spacing_small"
                      android:layout_width="match_parent"
-                     android:layout_height="match_parent">
+                     android:layout_height="wrap_content">
                      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                          android:layout_width="match_parent"
                          android:layout_height="match_parent"
@@ -93,11 +95,15 @@
                              android:layout_width="match_parent"
                              android:layout_height="match_parent"
                              android:id="@+id/episode_details_overview"
-                             android:text="xptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxptoxpto"
+                             android:text="You need internet access to find episodes."
                              android:textSize="@dimen/default_textSize_medium"
                              android:textColor="@color/default_textColor_fourth" />
                      </LinearLayout>
                 </android.support.v7.widget.CardView>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="TESTE"/>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
