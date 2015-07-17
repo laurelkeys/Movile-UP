@@ -9,6 +9,7 @@ import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.asynctask.FetchLocalEpisodeDetailsLoaderCallback;
 import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
+import com.movile.up.seriestracker.util.FormatUtil;
 
 
 public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpisodeDetailsListener<Episode> {
@@ -21,7 +22,7 @@ public class EpisodeDetailsActivity extends ActionBarActivity implements OnEpiso
         setContentView(R.layout.episode_details_activity);
         getLoaderManager().initLoader(
                 0, null, new FetchLocalEpisodeDetailsLoaderCallback(this, this,
-                        "https://api-v2launch.trakt.tv/shows/game-of-thrones/seasons/5/episodes/1?extended=full,images")
+                        FormatUtil.formatEpisodeUrl(this, "breaking-bad", "5", "1"))
         ).forceLoad();
         Log.d(TAG, "onCreate()");
     }
