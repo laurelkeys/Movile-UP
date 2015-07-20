@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/season_screenshot"
+            android:src="@drawable/highlight_placeholder"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_screenshot" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:height="48dp"
+            android:width="48dp"
+            android:background="@drawable/rating"
+            android:layout_margin="@dimen/default_spacing_large"
+            android:gravity="center"
+            android:text="??"
+            android:textSize="@dimen/default_textSize_large"
+            android:textColor="@color/default_textColor_first"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Episodes"
+            android:textColor="@color/default_color_third"
+            android:textSize="@dimen/default_textSize_verySmall"/>
+
+</RelativeLayout>

@@ -1,7 +1,6 @@
 package com.movile.up.seriestracker.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.movile.up.seriestracker.interfaces.EpisodeDetailsView;
 import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;

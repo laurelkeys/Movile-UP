@@ -23,6 +23,10 @@
     <color name="theme_textColorPrimary">@color/default_textColor_first</color>
     <color name="theme_windowBackground">@color/default_background_first</color>
 
+    <!-- ListView -->
+    <color name="list_view_divider_color">@color/default_background_first</color>
+    <color name="list_view_background_color">#FFFFFF</color>
+
     <!-- TO BE CONTINUED -->
 
 </resources>

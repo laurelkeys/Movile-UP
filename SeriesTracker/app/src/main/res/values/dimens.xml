@@ -13,6 +13,10 @@
     <dimen name="default_textSize_large">18sp</dimen>
     <dimen name="default_textSize_veryLarge">24sp</dimen>
 
+    <!-- ListView -->
+    <dimen name="list_view_divider_height">@dimen/default_spacing_veryVerySmall</dimen>
+
+
     <!-- TO BE CONTINUED -->
 
 </resources>

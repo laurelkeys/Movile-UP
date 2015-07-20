@@ -5,30 +5,32 @@ import android.util.Log;
 
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.interfaces.EpisodeRemoteService;
-import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
+import com.movile.up.seriestracker.interfaces.OnSeasonDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class FetchLocalEpisodeDetailsRetrofit {
-    private static final String TAG = FetchLocalEpisodeDetailsRetrofit.class.getSimpleName();
+public class FetchLocalSeasonDetailsRetrofit {
+    private static final String TAG = FetchLocalSeasonDetailsRetrofit.class.getSimpleName();
     private RestAdapter mAdapter;
-    private OnEpisodeDetailsListener<Episode> mCallback;
+    private OnSeasonDetailsListener<Episode> mCallback;
 
-    public FetchLocalEpisodeDetailsRetrofit(Context context, OnEpisodeDetailsListener<Episode> listener) {
+    public FetchLocalSeasonDetailsRetrofit(Context context, OnSeasonDetailsListener<Episode> listener) {
         mAdapter = new RestAdapter.Builder().setEndpoint(context.getString(R.string.api_url_base)).build();
         mCallback = listener;
     }
 
-    public void loadEpisode(String show, Long season, Long episode) {
+    public void loadEpisodes(String show, Long season) {
         EpisodeRemoteService service = mAdapter.create(EpisodeRemoteService.class);
-        service.getEpisodeDetails(show, season, episode, new Callback<Episode>() {
+        service.getEpisodes(show, season, new Callback<List<Episode>>() {
             @Override
-            public void success(Episode episode, Response response) {
-                mCallback.onEpisodeDetailsSuccess(episode);
+            public void success(List<Episode> episodes, Response response) {
+                mCallback.OnSeasonDetailsSuccess(episodes);
             }
 
             @Override
