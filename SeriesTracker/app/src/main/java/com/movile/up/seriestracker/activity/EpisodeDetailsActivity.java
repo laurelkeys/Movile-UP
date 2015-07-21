@@ -1,27 +1,39 @@
 package com.movile.up.seriestracker.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.movile.up.seriestracker.R;
+import com.movile.up.seriestracker.activity.base.BaseNavigationToolbarActivity;
 import com.movile.up.seriestracker.interfaces.EpisodeDetailsView;
 import com.movile.up.seriestracker.model.Episode;
 import com.movile.up.seriestracker.presenter.EpisodeDetailsPresenter;
 
 
-public class EpisodeDetailsActivity extends AppCompatActivity implements EpisodeDetailsView {
+public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implements EpisodeDetailsView {
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
+    private static final String EXTRA_SHOW = "show";
+    private static final String EXTRA_SEASON = "season";
+    private static final String EXTRA_EPISODE = "episode";
+    private String mShow;
+    private Long mSeason;
+    private Long mEpisode;
+
+    private EpisodeDetailsPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.episode_details_activity);
-        new EpisodeDetailsPresenter(this, this).loadRemoteEpisodeWithRetrofit();
+        configureToolbar();
+        showLoading();
+        extractInformationFromExtras();
+        new EpisodeDetailsPresenter(this, this).loadRemoteEpisodeWithRetrofit(mShow, mSeason, mEpisode);
         Log.d(TAG, "onCreate()");
     }
 
@@ -73,6 +85,13 @@ public class EpisodeDetailsActivity extends AppCompatActivity implements Episode
         Log.d(TAG, "onRestoreInstanceState()");
     }
 
+    private void extractInformationFromExtras() {
+        Bundle extras = getIntent().getExtras();
+        mShow = extras.getString(EXTRA_SHOW);
+        mSeason = extras.getLong(EXTRA_SEASON);
+        mEpisode = extras.getLong(EXTRA_EPISODE);
+    }
+
     @Override
     public void displayEpisode(Episode episode) {
         ((TextView) findViewById(R.id.episode_details_title)).setText(episode.title());
@@ -83,6 +102,9 @@ public class EpisodeDetailsActivity extends AppCompatActivity implements Episode
                 .load(episode.images().screenshot().get("full"))
                 .placeholder(R.drawable.highlight_placeholder)
                 .centerCrop()
-                .into((ImageView)findViewById(R.id.highlight_placeholder));
+                .into((ImageView) findViewById(R.id.highlight_placeholder));
+
+        getSupportActionBar().setTitle("S".concat(mSeason.toString().concat("- Episode ".concat(mEpisode.toString()))));
+        hideLoading();
     }
 }

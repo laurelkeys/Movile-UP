@@ -16,8 +16,8 @@ public class EpisodeDetailsPresenter implements OnEpisodeDetailsListener<Episode
         mView = view;
     }
 
-    public void loadRemoteEpisodeWithRetrofit() {
-        new FetchLocalEpisodeDetailsRetrofit(mContext, this).loadEpisode("house-of-cards", 2l, 7l);
+    public void loadRemoteEpisodeWithRetrofit(String show, Long season, Long episode) {
+        new FetchLocalEpisodeDetailsRetrofit(mContext, this).loadEpisode(show, season, episode);
     }
 
     public void onEpisodeDetailsSuccess(Episode episode) {

@@ -18,8 +18,8 @@ public class SeasonDetailsPresenter implements OnSeasonDetailsListener<Episode> 
         mView = view;
     }
 
-    public void loadRemoteEpisodesWithRetrofit() {
-        new FetchLocalSeasonDetailsRetrofit(mContext, this).loadEpisodes("house-of-cards", 2l);
+    public void loadRemoteEpisodesWithRetrofit(String show, Long season) {
+        new FetchLocalSeasonDetailsRetrofit(mContext, this).loadEpisodes(show, season);
     }
 
     public void OnSeasonDetailsSuccess(List<Episode> episodes) {

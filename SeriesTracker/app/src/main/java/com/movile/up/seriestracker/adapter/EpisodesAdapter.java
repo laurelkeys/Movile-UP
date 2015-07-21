@@ -13,11 +13,13 @@ import com.movile.up.seriestracker.model.Episode;
 
 import java.util.List;
 
-public class SeasonDetailsAdapter extends ArrayAdapter<Episode> {
+public class EpisodesAdapter extends ArrayAdapter<Episode> implements OnContentClickListener {
     private List<Episode> mEpisodes;
+    private OnContentClickListener mClickListener;
 
-    public SeasonDetailsAdapter(Context context, OnContentClickListener clickListener) {
+    public EpisodesAdapter(Context context, OnContentClickListener clickListener) {
         super(context, R.layout.season_details_episode);
+        mClickListener = clickListener;
     }
 
     public int getCount() {
@@ -48,14 +50,25 @@ public class SeasonDetailsAdapter extends ArrayAdapter<Episode> {
         return view;
     }
 
-    private void populateViewFromHolder(ViewHolder holder, int position) {
+    private void populateViewFromHolder(ViewHolder holder, final int position) {
         holder.getNumber().setText("E".concat(mEpisodes.get(position).number().toString()));
         holder.getTitle().setText(mEpisodes.get(position).title());
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mClickListener.onEpisodeClick(mEpisodes.get(position));
+            }
+        });
     }
 
     public void updateEpisodes(List<Episode> episodes) {
         mEpisodes = episodes;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEpisodeClick(Episode episode) {
+
     }
 
     public static class ViewHolder {
@@ -64,7 +77,7 @@ public class SeasonDetailsAdapter extends ArrayAdapter<Episode> {
         private TextView title;
 
         public ViewHolder(View root) {
-            mView = root.findViewById(R.id.episode_view);
+            mView = root;
             number = (TextView) root.findViewById(R.id.episode_number);
             title = (TextView) root.findViewById(R.id.episode_title);
         }

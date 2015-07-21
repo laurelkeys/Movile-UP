@@ -1,12 +1,13 @@
 package com.movile.up.seriestracker.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.adapter.SeasonDetailsAdapter;
+import com.movile.up.seriestracker.activity.base.BaseNavigationToolbarActivity;
+import com.movile.up.seriestracker.adapter.EpisodesAdapter;
 import com.movile.up.seriestracker.interfaces.OnContentClickListener;
 import com.movile.up.seriestracker.interfaces.SeasonDetailsView;
 import com.movile.up.seriestracker.model.Episode;
@@ -14,24 +15,31 @@ import com.movile.up.seriestracker.presenter.SeasonDetailsPresenter;
 
 import java.util.List;
 
-public class SeasonDetailsActivity extends AppCompatActivity implements SeasonDetailsView {
+public class SeasonDetailsActivity extends BaseNavigationToolbarActivity implements SeasonDetailsView, OnContentClickListener {
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
+    private static final String EXTRA_SHOW = "show";
+    private static final String EXTRA_SEASON = "season";
+    private static final String EXTRA_EPISODE = "episode";
+    private String mShow = "house-of-cards";
+    private Long mSeason = 2l;
     private List<Episode> mEpisodes;
     private OnContentClickListener listener;
-    public SeasonDetailsAdapter mAdapter;
+    public EpisodesAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.season_details_activity);
-        new SeasonDetailsPresenter(this, this).loadRemoteEpisodesWithRetrofit();
+        configureToolbar();
+        showLoading();
+
+        new SeasonDetailsPresenter(this, this).loadRemoteEpisodesWithRetrofit(mShow, mSeason);
         ListView view = (ListView) findViewById(R.id.list_view);
         //view.addHeaderView(headerView, null, false);
         //view.setEmptyView(emptyView);
         //view.addFooterView(footerView, null, false);
-
-        mAdapter = new SeasonDetailsAdapter(this, listener);
+        mAdapter = new EpisodesAdapter(this, this);
         view.setAdapter(mAdapter);
         Log.d(TAG, "onCreate()");
     }
@@ -87,5 +95,16 @@ public class SeasonDetailsActivity extends AppCompatActivity implements SeasonDe
     @Override
     public void displayEpisodes(List<Episode> episodes) {
         mAdapter.updateEpisodes(episodes);
+        getSupportActionBar().setTitle("Season ".concat(mSeason.toString()));
+        hideLoading();
+    }
+
+    @Override
+    public void onEpisodeClick(Episode episode) {
+        Intent intent = new Intent(this, EpisodeDetailsActivity.class);
+        intent.putExtra(EXTRA_SHOW, mShow);
+        intent.putExtra(EXTRA_SEASON, mSeason);
+        intent.putExtra(EXTRA_EPISODE, episode.number());
+        startActivity(intent);
     }
 }
