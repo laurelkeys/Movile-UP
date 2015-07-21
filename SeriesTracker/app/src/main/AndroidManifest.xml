@@ -12,14 +12,17 @@
         <meta-data
             android:name="com.movile.up.seriestracker.util.GlideConfiguration"
             android:value="GlideModule" />
-        <activity
-            android:name=".activity.SeasonDetailsActivity"
+        <activity android:name=".activity.ShowDetailsActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SeasonDetailsActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activity.EpisodeDetailsActivity"

@@ -7,6 +7,10 @@
     <string name="base_navigation_drawer_open">Open</string>
     <string name="base_navigation_drawer_close">Close</string>
 
+    <!-- ViewPager -->
+    <string name="navigation_info_label">INFO</string>
+    <string name="navigation_season_label">SEASON</string>
+
     <!-- TO BE CONTINUED -->
 
 </resources>
