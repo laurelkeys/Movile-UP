@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_background_first">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/season_screenshot"
             android:src="@drawable/highlight_placeholder"
             android:scaleType="centerCrop"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/show_screenshot"
-            android:src="@drawable/season_item_placeholder" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/show_rating"
             android:height="48dp"
             android:width="48dp"
-            android:layout_alignBottom="@id/season_screenshot"
-            android:background="@drawable/rating"
             android:layout_margin="@dimen/default_spacing_large"
+            android:layout_below="@id/season_screenshot"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/rating"
             android:gravity="center"
             android:text="0.0"
             android:textSize="@dimen/default_textSize_large"
             android:textColor="@color/default_textColor_first"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_screenshot"
+            android:layout_marginLeft="@dimen/default_spacing_large"
+            android:layout_alignBottom="@id/show_rating"
+            android:src="@drawable/season_item_placeholder" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/show_screenshot"
+            android:layout_marginLeft="@dimen/default_spacing_large"
+            android:layout_marginBottom="@dimen/default_spacing_large"
             android:text="Episodes"
             android:textColor="@color/default_color_third"
             android:textSize="@dimen/default_textSize_verySmall"/>

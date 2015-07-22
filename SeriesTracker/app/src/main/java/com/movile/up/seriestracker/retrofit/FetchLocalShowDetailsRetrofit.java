@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.interfaces.listener.OnSeasonDetailsListener;
-import com.movile.up.seriestracker.model.Episode;
-import com.movile.up.seriestracker.remote.service.SeasonRemoteService;
+import com.movile.up.seriestracker.interfaces.listener.OnShowDetailsListener;
+import com.movile.up.seriestracker.model.Season;
+import com.movile.up.seriestracker.remote.service.ShowRemoteService;
 
 import java.util.List;
 
@@ -15,22 +15,22 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class FetchLocalSeasonDetailsRetrofit {
+public class FetchLocalShowDetailsRetrofit {
     private static final String TAG = FetchLocalSeasonDetailsRetrofit.class.getSimpleName();
     private RestAdapter mAdapter;
-    private OnSeasonDetailsListener<Episode> mCallback;
+    private OnShowDetailsListener<Season> mCallback;
 
-    public FetchLocalSeasonDetailsRetrofit(Context context, OnSeasonDetailsListener<Episode> listener) {
+    public FetchLocalShowDetailsRetrofit(Context context, OnShowDetailsListener<Season> listener) {
         mAdapter = new RestAdapter.Builder().setEndpoint(context.getString(R.string.api_url_base)).build();
         mCallback = listener;
     }
 
-    public void loadEpisodes(String show, Long season) {
-        SeasonRemoteService service = mAdapter.create(SeasonRemoteService.class);
-        service.getEpisodes(show, season, new Callback<List<Episode>>() {
+    public void loadSeasons(String show) {
+        ShowRemoteService service = mAdapter.create(ShowRemoteService.class);
+        service.getSeasons(show, new Callback<List<Season>>() {
             @Override
-            public void success(List<Episode> episodes, Response response) {
-                mCallback.OnSeasonDetailsSuccess(episodes);
+            public void success(List<Season> seasons, Response response) {
+                mCallback.OnShowDetailsSuccess(seasons);
             }
 
             @Override
@@ -39,5 +39,4 @@ public class FetchLocalSeasonDetailsRetrofit {
             }
         });
     }
-
 }

@@ -2,8 +2,8 @@ package com.movile.up.seriestracker.presenter;
 
 import android.content.Context;
 
-import com.movile.up.seriestracker.interfaces.EpisodeDetailsView;
-import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
+import com.movile.up.seriestracker.interfaces.view.EpisodeDetailsView;
+import com.movile.up.seriestracker.interfaces.listener.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
 import com.movile.up.seriestracker.retrofit.FetchLocalEpisodeDetailsRetrofit;
 

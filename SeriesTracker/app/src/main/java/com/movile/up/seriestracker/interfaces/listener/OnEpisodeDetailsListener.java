@@ -1,7 +1,7 @@
-package com.movile.up.seriestracker.interfaces;
+package com.movile.up.seriestracker.interfaces.listener;
 
 import com.movile.up.seriestracker.model.Episode;
 
 public interface OnEpisodeDetailsListener<T> {
-    public void onEpisodeDetailsSuccess(T type);
+    void onEpisodeDetailsSuccess(T type);
 }

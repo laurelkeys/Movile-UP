@@ -41,6 +41,15 @@
         <item name="android:indeterminate">true</item>
     </style>
 
+    <!-- RecyclerView -->
+    <style name="AppTheme.Linear"></style>
+
+    <style name="AppTheme.Linear.Horizontal"></style>
+
+    <style name="AppTheme.Linear.Horizontal.Recycler">
+        <item name="android:layout_height">@dimen/linear_horizontal_recycler_height</item>
+    </style>
+
     <!-- TO BE CONTINUED -->
 
 </resources>

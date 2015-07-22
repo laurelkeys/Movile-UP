@@ -1,6 +1,5 @@
 package com.movile.up.seriestracker.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -9,10 +8,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.activity.base.BaseNavigationToolbarActivity;
-import com.movile.up.seriestracker.interfaces.EpisodeDetailsView;
+import com.movile.up.seriestracker.interfaces.view.EpisodeDetailsView;
 import com.movile.up.seriestracker.model.Episode;
 import com.movile.up.seriestracker.presenter.EpisodeDetailsPresenter;
-
 
 public class EpisodeDetailsActivity extends BaseNavigationToolbarActivity implements EpisodeDetailsView {
 

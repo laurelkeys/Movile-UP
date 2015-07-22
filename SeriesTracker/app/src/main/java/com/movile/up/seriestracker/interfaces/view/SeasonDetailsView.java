@@ -1,4 +1,4 @@
-package com.movile.up.seriestracker.interfaces;
+package com.movile.up.seriestracker.interfaces.view;
 
 import com.movile.up.seriestracker.model.Episode;
 

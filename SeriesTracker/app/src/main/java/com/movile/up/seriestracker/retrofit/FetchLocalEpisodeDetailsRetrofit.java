@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.interfaces.EpisodeRemoteService;
-import com.movile.up.seriestracker.interfaces.OnEpisodeDetailsListener;
+import com.movile.up.seriestracker.remote.service.EpisodeRemoteService;
+import com.movile.up.seriestracker.interfaces.listener.OnEpisodeDetailsListener;
 import com.movile.up.seriestracker.model.Episode;
 
 import retrofit.Callback;

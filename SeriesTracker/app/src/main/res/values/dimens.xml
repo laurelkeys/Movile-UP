@@ -23,6 +23,9 @@
     <!-- Base Loading -->
     <dimen name="base_loading_progress_size">48dp</dimen>
 
+    <!-- RecyclerView -->
+    <dimen name="linear_horizontal_recycler_height">65dp</dimen>
+
     <!-- TO BE CONTINUED -->
 
 </resources>

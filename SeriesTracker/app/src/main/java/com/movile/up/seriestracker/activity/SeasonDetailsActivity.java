@@ -3,28 +3,33 @@ package com.movile.up.seriestracker.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.activity.base.BaseNavigationToolbarActivity;
 import com.movile.up.seriestracker.adapter.EpisodesAdapter;
-import com.movile.up.seriestracker.interfaces.OnContentClickListener;
-import com.movile.up.seriestracker.interfaces.SeasonDetailsView;
+import com.movile.up.seriestracker.interfaces.listener.OnEpisodeClickListener;
+import com.movile.up.seriestracker.interfaces.view.SeasonDetailsView;
 import com.movile.up.seriestracker.model.Episode;
 import com.movile.up.seriestracker.presenter.SeasonDetailsPresenter;
 
 import java.util.List;
 
-public class SeasonDetailsActivity extends BaseNavigationToolbarActivity implements SeasonDetailsView, OnContentClickListener {
+public class SeasonDetailsActivity extends BaseNavigationToolbarActivity implements SeasonDetailsView, OnEpisodeClickListener {
 
     private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
     private static final String EXTRA_SHOW = "show";
     private static final String EXTRA_SEASON = "season";
     private static final String EXTRA_EPISODE = "episode";
-    private String mShow = "house-of-cards";
-    private Long mSeason = 2l;
-    private List<Episode> mEpisodes;
-    private OnContentClickListener listener;
+    private static final String EXTRA_RATING = "rating";
+    private static final String EXTRA_POSTER = "poster";
+    private static final String EXTRA_THUMB = "thumb";
+    private String mShow;
+    private Long mSeason;
+    private Long mRating;
+    private String mPoster;
+    private String mThumb;
     public EpisodesAdapter mAdapter;
 
     @Override
@@ -33,12 +38,11 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
         setContentView(R.layout.season_details_activity);
         configureToolbar();
         showLoading();
-
+        extractInformationFromExtras();
         new SeasonDetailsPresenter(this, this).loadRemoteEpisodesWithRetrofit(mShow, mSeason);
         ListView view = (ListView) findViewById(R.id.list_view);
-        //view.addHeaderView(headerView, null, false);
-        //view.setEmptyView(emptyView);
-        //view.addFooterView(footerView, null, false);
+        View headerView = getLayoutInflater().inflate(R.layout.season_details_header, null, false);
+        view.addHeaderView(headerView, null, false);
         mAdapter = new EpisodesAdapter(this, this);
         view.setAdapter(mAdapter);
         Log.d(TAG, "onCreate()");
@@ -90,6 +94,15 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.d(TAG, "onRestoreInstanceState()");
+    }
+
+    private void extractInformationFromExtras() {
+        Bundle extras = getIntent().getExtras();
+        mShow = extras.getString(EXTRA_SHOW);
+        mSeason = extras.getLong(EXTRA_SEASON);
+        mRating = extras.getLong(EXTRA_RATING);
+        mPoster = extras.getString(EXTRA_POSTER);
+        mThumb = extras.getString(EXTRA_THUMB);
     }
 
     @Override

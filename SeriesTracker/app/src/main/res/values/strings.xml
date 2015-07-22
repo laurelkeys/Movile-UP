@@ -11,6 +11,10 @@
     <string name="navigation_info_label">INFO</string>
     <string name="navigation_season_label">SEASON</string>
 
+    <!-- RecyclerView -->
+    <string name="show_details_season_label">Season</string>
+    <string name="show_details_episodes_label">episodes</string>
+
     <!-- TO BE CONTINUED -->
 
 </resources>

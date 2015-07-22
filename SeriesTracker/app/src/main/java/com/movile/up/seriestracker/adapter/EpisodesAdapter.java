@@ -8,16 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.interfaces.OnContentClickListener;
+import com.movile.up.seriestracker.interfaces.listener.OnEpisodeClickListener;
 import com.movile.up.seriestracker.model.Episode;
 
 import java.util.List;
 
-public class EpisodesAdapter extends ArrayAdapter<Episode> implements OnContentClickListener {
+public class EpisodesAdapter extends ArrayAdapter<Episode> {
     private List<Episode> mEpisodes;
-    private OnContentClickListener mClickListener;
+    private OnEpisodeClickListener mClickListener;
 
-    public EpisodesAdapter(Context context, OnContentClickListener clickListener) {
+    public EpisodesAdapter(Context context, OnEpisodeClickListener clickListener) {
         super(context, R.layout.season_details_episode);
         mClickListener = clickListener;
     }
@@ -64,11 +64,6 @@ public class EpisodesAdapter extends ArrayAdapter<Episode> implements OnContentC
     public void updateEpisodes(List<Episode> episodes) {
         mEpisodes = episodes;
         notifyDataSetChanged();
-    }
-
-    @Override
-    public void onEpisodeClick(Episode episode) {
-
     }
 
     public static class ViewHolder {

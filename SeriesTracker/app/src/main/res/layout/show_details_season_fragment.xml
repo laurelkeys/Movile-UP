@@ -4,4 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/default_background_first">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/season_horizontal_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        style="@style/AppTheme.Linear.Horizontal.Recycler" />
+
+
 </LinearLayout>
