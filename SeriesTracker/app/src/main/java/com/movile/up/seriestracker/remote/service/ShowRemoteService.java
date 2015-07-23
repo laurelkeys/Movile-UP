@@ -1,6 +1,7 @@
 package com.movile.up.seriestracker.remote.service;
 
 import com.movile.up.seriestracker.model.Season;
+import com.movile.up.seriestracker.model.Show;
 
 import java.util.List;
 
@@ -21,4 +22,12 @@ public interface ShowRemoteService {
     void getSeasons(
             @Path("show") String show,
             Callback<List<Season>> callback);
+
+    @Headers({
+            "trakt-api-version: " + API_VERSION,
+            "trakt-api-key: " + API_KEY
+    })
+    @GET("/shows/popular?limit=50&extended=full,images")
+    void getPopularShows(
+            Callback<List<Show>> callback);
 }

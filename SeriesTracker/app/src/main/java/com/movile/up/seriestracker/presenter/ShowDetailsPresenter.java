@@ -18,7 +18,7 @@ public class ShowDetailsPresenter implements OnShowDetailsListener<Season> {
         mView = view;
     }
 
-    public void loadRemoteEpisodesWithRetrofit(String show) {
+    public void loadRemoteSeasonsWithRetrofit(String show) {
         new FetchLocalShowDetailsRetrofit(mContext, this).loadSeasons(show);
     }
 

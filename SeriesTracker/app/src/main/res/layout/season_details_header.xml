@@ -13,15 +13,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/show_rating"
+            android:id="@+id/season_rating"
             android:height="48dp"
             android:width="48dp"
+            android:maxLength="3"
             android:layout_margin="@dimen/default_spacing_large"
             android:layout_below="@id/season_screenshot"
             android:layout_alignParentRight="true"
             android:background="@drawable/rating"
             android:gravity="center"
-            android:text="0.0"
+            android:text="10"
             android:textSize="@dimen/default_textSize_large"
             android:textColor="@color/default_textColor_first"/>
         <ImageView
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/show_screenshot"
             android:layout_marginLeft="@dimen/default_spacing_large"
-            android:layout_alignBottom="@id/show_rating"
+            android:layout_alignBottom="@id/season_rating"
             android:src="@drawable/season_item_placeholder" />
         <TextView
             android:layout_width="wrap_content"

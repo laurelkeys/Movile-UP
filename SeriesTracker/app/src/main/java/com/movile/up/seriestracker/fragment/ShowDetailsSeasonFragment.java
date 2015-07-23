@@ -23,13 +23,13 @@ import java.util.List;
 
 public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsView, OnSeasonClickListener {
 
-    private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
+    //private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
     private static final String EXTRA_SHOW = "show";
     private static final String EXTRA_SEASON = "season";
     private static final String EXTRA_RATING = "rating";
     private static final String EXTRA_POSTER = "poster";
     private static final String EXTRA_THUMB = "thumb";
-    private String mShow = "house-of-cards";
+    private String mShow;
     private View mView;
     private RecyclerAdapter mAdapter;
 
@@ -43,7 +43,9 @@ public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsVi
     @Override
     public void onStart() {
         super.onStart();
-        new ShowDetailsPresenter(this.getActivity(), this).loadRemoteEpisodesWithRetrofit(mShow);
+        Bundle b = this.getArguments();
+        mShow = b.getString(EXTRA_SHOW);
+        new ShowDetailsPresenter(this.getActivity(), this).loadRemoteSeasonsWithRetrofit(mShow);
         configureRecyclerView();
     }
 

@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.activity.base.BaseNavigationToolbarActivity;
 import com.movile.up.seriestracker.adapter.EpisodesAdapter;
@@ -27,7 +30,7 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     private static final String EXTRA_THUMB = "thumb";
     private String mShow;
     private Long mSeason;
-    private Long mRating;
+    private Double mRating;
     private String mPoster;
     private String mThumb;
     public EpisodesAdapter mAdapter;
@@ -100,7 +103,7 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
         Bundle extras = getIntent().getExtras();
         mShow = extras.getString(EXTRA_SHOW);
         mSeason = extras.getLong(EXTRA_SEASON);
-        mRating = extras.getLong(EXTRA_RATING);
+        mRating = extras.getDouble(EXTRA_RATING);
         mPoster = extras.getString(EXTRA_POSTER);
         mThumb = extras.getString(EXTRA_THUMB);
     }
@@ -108,6 +111,20 @@ public class SeasonDetailsActivity extends BaseNavigationToolbarActivity impleme
     @Override
     public void displayEpisodes(List<Episode> episodes) {
         mAdapter.updateEpisodes(episodes);
+        extractInformationFromExtras();
+        ((TextView) findViewById(R.id.season_rating)).setText(mRating.toString());
+        Glide
+                .with(this)
+                .load(mThumb)
+                .placeholder(R.drawable.highlight_placeholder)
+                .centerCrop()
+                .into((ImageView) findViewById(R.id.season_screenshot));
+        Glide
+                .with(this)
+                .load(mPoster)
+                .placeholder(R.drawable.season_item_placeholder)
+                .centerCrop()
+                .into((ImageView) findViewById(R.id.show_screenshot));
         getSupportActionBar().setTitle("Season ".concat(mSeason.toString()));
         hideLoading();
     }
