@@ -9,8 +9,8 @@ import com.movile.up.seriestracker.adapter.ViewPagerAdapter;
 
 public class ShowDetailsActivity extends BaseNavigationToolbarActivity {
 
-    private static final String EXTRA_SHOW = "show";
-    private static final String EXTRA_SHOW_TITLE = "title";
+    public static final String EXTRA_SHOW = "show";
+    public static final String EXTRA_SHOW_TITLE = "title";
     private String mShow;
     private String mShowTitle;
 

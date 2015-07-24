@@ -20,8 +20,8 @@ import java.util.List;
 
 public class ShowsGridActivity extends AppCompatActivity implements ShowsGridView, OnShowClickListener {
 
-    private static final String EXTRA_SHOW = "show";
-    private static final String EXTRA_SHOW_TITLE = "title";
+    public static final String EXTRA_SHOW = "show";
+    public static final String EXTRA_SHOW_TITLE = "title";
     private ShowsGridAdapter mAdapter;
 
     @Override
@@ -37,11 +37,9 @@ public class ShowsGridActivity extends AppCompatActivity implements ShowsGridVie
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, UpdatesService.class);
-        startService(intent);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, UpdatesService.class), 0);
-        AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        manager.setRepeating(AlarmManager.RTC_WAKEUP, 0, 10, pendingIntent);
+        // PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, UpdatesService.class), 0);
+        // AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        // manager.setRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
     }
 
     @Override
