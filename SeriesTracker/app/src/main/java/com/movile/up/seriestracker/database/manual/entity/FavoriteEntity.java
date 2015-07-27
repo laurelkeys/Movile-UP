@@ -4,9 +4,24 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
 
+import com.movile.up.seriestracker.database.SeriesTrackerDatabase;
 import com.movile.up.seriestracker.database.manual.helper.DatabaseHelper;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
-public class FavoriteEntity {
+@Table(databaseName = SeriesTrackerDatabase.NAME)
+public class FavoriteEntity extends BaseModel {
+    @Column(name = BaseColumns._ID)
+    @PrimaryKey(autoincrement = true)
+    Long id;
+
+    @Column
+    String slug;
+
+    @Column
+    String title;
 
     public static class FavoriteEntityFields implements BaseColumns {
         public static final String TABLE_NAME = "favorite";
