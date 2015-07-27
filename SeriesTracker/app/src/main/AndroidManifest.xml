@@ -49,6 +49,9 @@
         <service
             android:name=".service.UpdatesService"
             android:exported="false" />
+        <provider
+            android:name=".database.manual.provider.SeriesTrackerContentProvider"
+            android:authorities="@string/database_authority" />
     </application>
 
 </manifest>

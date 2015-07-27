@@ -20,8 +20,17 @@ import java.util.List;
 
 public class ShowsGridActivity extends AppCompatActivity implements ShowsGridView, OnShowClickListener {
 
+    public static final String EXTRA_SHOW_MODEL = "model";
     public static final String EXTRA_SHOW = "show";
     public static final String EXTRA_SHOW_TITLE = "title";
+    public static final String EXTRA_SHOW_RATING = "rating";
+    public static final String EXTRA_SHOW_SCREENSHOT = "screenshot";
+    public static final String EXTRA_SHOW_INFO_SUMMARY = "summary";
+    public static final String EXTRA_SHOW_INFO_STATUS = "status";
+    public static final String EXTRA_SHOW_INFO_YEAR = "year";
+    public static final String EXTRA_SHOW_INFO_LANGUAGE = "language";
+    public static final String EXTRA_SHOW_INFO_COUNTRY = "country";
+    // genres
     private ShowsGridAdapter mAdapter;
 
     @Override
@@ -35,14 +44,6 @@ public class ShowsGridActivity extends AppCompatActivity implements ShowsGridVie
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        // PendingIntent pendingIntent = PendingIntent.getService(this, 0, new Intent(this, UpdatesService.class), 0);
-        // AlarmManager manager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        // manager.setRepeating(AlarmManager.RTC_WAKEUP, 0, 10000, pendingIntent);
-    }
-
-    @Override
     public void displayShows(List<Show> shows) {
         mAdapter.updateShows(shows);
     }
@@ -50,8 +51,18 @@ public class ShowsGridActivity extends AppCompatActivity implements ShowsGridVie
     @Override
     public void onShowClick(Show show) {
         Intent intent = new Intent(this, ShowDetailsActivity.class);
+        intent.putExtra(EXTRA_SHOW_MODEL, show);
         intent.putExtra(EXTRA_SHOW, show.ids().slug());
         intent.putExtra(EXTRA_SHOW_TITLE, show.title());
+        intent.putExtra(EXTRA_SHOW_RATING, show.rating());
+        intent.putExtra(EXTRA_SHOW_SCREENSHOT, show.images().thumb().get("full"));
+        /*
+        intent.putExtra(EXTRA_SHOW_INFO_SUMMARY, show.overview());
+        intent.putExtra(EXTRA_SHOW_INFO_STATUS, show.status());
+        intent.putExtra(EXTRA_SHOW_INFO_YEAR, show.year());
+        intent.putExtra(EXTRA_SHOW_INFO_LANGUAGE, show.language());
+        intent.putExtra(EXTRA_SHOW_INFO_COUNTRY, show.country());
+        */
         startActivity(intent);
     }
 }

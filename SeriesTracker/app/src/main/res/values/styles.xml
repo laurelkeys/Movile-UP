@@ -62,6 +62,11 @@
         <item name="android:clipToPadding">false</item>
     </style>
 
+    <!-- FAB -->
+    <style name="AppTheme.ShowDetails"></style>
+
+    <style name="AppTheme.ShowDetails.Favorite"></style>
+
     <!-- TO BE CONTINUED -->
 
 </resources>

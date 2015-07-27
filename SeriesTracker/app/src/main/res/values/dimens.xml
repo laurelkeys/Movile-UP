@@ -7,6 +7,7 @@
     <dimen name="default_spacing_small">4dp</dimen>
     <dimen name="default_spacing_medium">8dp</dimen>
     <dimen name="default_spacing_large">16dp</dimen>
+    <dimen name="default_spacing_veryLarge">32dp</dimen>
     <dimen name="default_textSize_verySmall">12sp</dimen>
     <dimen name="default_textSize_small">14sp</dimen>
     <dimen name="default_textSize_medium">16sp</dimen>

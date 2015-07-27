@@ -1,23 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_screenshot"
+            android:src="@drawable/highlight_placeholder"
+            android:scaleType="centerCrop"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_details_rating"
+            android:height="48dp"
+            android:width="48dp"
+            android:maxLength="3"
+            android:layout_marginLeft="@dimen/default_spacing_veryLarge"
+            android:layout_marginBottom="@dimen/default_spacing_large"
+            android:layout_alignBottom="@id/show_screenshot"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/rating"
+            android:gravity="center"
+            android:text="10"
+            android:textSize="@dimen/default_textSize_large"
+            android:textColor="@color/default_textColor_first" />
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/show_details_favorite"
+            android:layout_marginRight="@dimen/default_spacing_large"
+            android:layout_alignBottom="@id/show_details_rating"
+            android:layout_alignParentRight="true"
+            style="@style/AppTheme.ShowDetails.Favorite" />
+
     </RelativeLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_below="@id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" >
         <android.support.v4.view.PagerTabStrip
             android:id="@+id/pager_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/default_color_first"
+            android:textColor="@color/default_textColor_first"/>
 
     </android.support.v4.view.ViewPager>
 
-</RelativeLayout>
+</LinearLayout>
