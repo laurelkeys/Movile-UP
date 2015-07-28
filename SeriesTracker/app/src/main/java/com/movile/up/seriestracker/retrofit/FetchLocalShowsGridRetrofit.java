@@ -29,8 +29,8 @@ public class FetchLocalShowsGridRetrofit {
         ShowRemoteService service = mAdapter.create(ShowRemoteService.class);
         service.getPopularShows(new Callback<List<Show>>() {
             @Override
-            public void success(List<Show> episodes, Response response) {
-                mCallback.OnShowsGridSuccess(episodes);
+            public void success(List<Show> shows, Response response) {
+                mCallback.OnShowsGridSuccess(shows);
             }
 
             @Override

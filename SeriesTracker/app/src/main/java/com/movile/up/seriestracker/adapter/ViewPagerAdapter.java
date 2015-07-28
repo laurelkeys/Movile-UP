@@ -39,6 +39,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
             b.putLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR, mShowModel.year());
             b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE, mShowModel.language());
             b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY, mShowModel.country());
+            b.putStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES, mShowModel.genres());
             ShowDetailsInfoFragment fragment = new ShowDetailsInfoFragment();
             fragment.setArguments(b);
             return fragment;

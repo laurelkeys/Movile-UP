@@ -48,35 +48,19 @@ public class FavoriteEntity extends BaseModel {
         }
     }
 
-    private String mSlug;
-    private String mTitle;
-
     public FavoriteEntity() {
     }
 
-    public FavoriteEntity(String slug, String title) {
-        mSlug = slug;
-        mTitle = title;
+    public FavoriteEntity(String _slug, String _title) { // FIXME
+        slug = _slug;
+        title = _title;
     }
 
     public String slug() {
-        return mSlug;
+        return slug;
     }
 
     public String title() {
-        return mTitle;
-    }
-
-    public ContentValues toContentValues() {
-        ContentValues values = new ContentValues();
-        values.put(FavoriteEntityFields.COLUMN_SLUG, mSlug);
-        values.put(FavoriteEntityFields.COLUMN_TITLE, mTitle);
-        return values;
-    }
-
-    public FavoriteEntity fromCursor(Cursor cursor) {
-        mTitle = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteEntityFields.COLUMN_TITLE));
-        mSlug = cursor.getString(cursor.getColumnIndexOrThrow(FavoriteEntityFields.COLUMN_SLUG));
-        return this;
+        return title;
     }
 }

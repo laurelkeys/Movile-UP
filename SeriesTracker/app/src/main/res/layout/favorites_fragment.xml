@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_spacing_large"
+        android:orientation="vertical"
+        android:background="@color/default_color_first">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/favorites_header_tv_unhappy"
+            android:layout_marginBottom="@dimen/default_spacing_veryLarge"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favorited Shows"
+            android:textColor="@color/default_textColor_first"
+            android:textSize="@dimen/default_textSize_medium"/>
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/favorites_list_view"
+        android:background="@color/list_view_background_color" >
+
+    </ListView>
+
+</LinearLayout>

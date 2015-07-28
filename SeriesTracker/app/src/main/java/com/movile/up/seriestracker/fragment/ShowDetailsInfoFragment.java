@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.movile.up.seriestracker.R;
@@ -18,6 +19,7 @@ public class ShowDetailsInfoFragment extends Fragment {
     private Long mShowYear;
     private String mShowLanguage;
     private String mShowCountry;
+    private String[] mShowGenres;
     private View mView;
 
     @Nullable
@@ -41,6 +43,7 @@ public class ShowDetailsInfoFragment extends Fragment {
         mShowYear = b.getLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR);
         mShowLanguage = b.getString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE);
         mShowCountry = b.getString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY);
+        mShowGenres = b.getStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES);
     }
 
     private void displayShowInfo() {
@@ -51,6 +54,12 @@ public class ShowDetailsInfoFragment extends Fragment {
                 "\nCountry: " + mShowCountry +
                 "\nLanguage: " + mShowLanguage;
         ((TextView) mView.findViewById(R.id.show_details_technical_info)).setText(technicalInfo);
-
+        LinearLayout ll = (LinearLayout) mView.findViewById(R.id.show_details_genres);
+        for(int i = 0; i < mShowGenres.length; ++i) {
+            TextView tv = new TextView(mView.getContext());
+            tv.setText(mShowGenres[i]);
+            ll.addView(tv);
+            // FIXME
+        }
     }
 }

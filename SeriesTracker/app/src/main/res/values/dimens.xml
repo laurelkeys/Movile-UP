@@ -14,15 +14,18 @@
     <dimen name="default_textSize_large">18sp</dimen>
     <dimen name="default_textSize_veryLarge">24sp</dimen>
 
-    <!-- ListView -->
-    <dimen name="list_view_divider_height">@dimen/default_spacing_veryVerySmall</dimen>
-
     <!-- Base Navigation Toolbar -->
     <dimen name="base_navigation_toolbar_height">56dp</dimen>
     <dimen name="base_navigation_toolbar_minHeight">@dimen/base_navigation_toolbar_height</dimen>
 
+    <!-- Base Navigation Drawer -->
+    <dimen name="base_navigation_drawer_content_width">300dp</dimen>
+
     <!-- Base Loading -->
     <dimen name="base_loading_progress_size">48dp</dimen>
+
+    <!-- ListView -->
+    <dimen name="list_view_divider_height">@dimen/default_spacing_veryVerySmall</dimen>
 
     <!-- RecyclerView -->
     <dimen name="linear_horizontal_recycler_height">65dp</dimen>
