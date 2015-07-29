@@ -20,12 +20,17 @@ import com.movile.up.seriestracker.model.Show;
 
 public class ShowDetailsActivity extends BaseNavigationToolbarActivity implements OnFavoriteClickListener {
 
-    public static final String EXTRA_SHOW = "show";
     private Show mShowModel;
     private String mShow;
-    private String mShowTitle;
-    private Double mShowRating;
-    private String mShowScreenshot;
+    private String mScreenshot;
+    private Double mRating;
+    private String mTitle;
+    private String mOverview;
+    private String mStatus;
+    private Long mYear;
+    private String mCountry;
+    private String mLanguage;
+    private String[] mGenres;
     private FloatingActionButton mFab;
     private Favorite mFavorite;
     private FavoriteDAO mDao = new FavoriteDAO(this);
@@ -37,7 +42,7 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
         setContentView(R.layout.show_details_activity);
         configureToolbar();
         configureContentPager();
-        getSupportActionBar().setTitle(mShowTitle);
+        getSupportActionBar().setTitle(mTitle);
 
         displayShow();
 
@@ -62,24 +67,30 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
     private void configureContentPager() {
         extractInformationFromExtras();
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this, mShowModel));
-
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this,
+                mShow, mOverview, mStatus, mYear, mCountry, mLanguage, mGenres));
     }
 
     private void extractInformationFromExtras() {
         Bundle extras = getIntent().getExtras();
-        mShowModel= (Show) extras.get(ShowsGridActivity.EXTRA_SHOW_MODEL);
+        // mShowModel= (Show) extras.get(ShowsGridActivity.EXTRA_SHOW_MODEL);
         mShow = extras.getString(ShowsGridActivity.EXTRA_SHOW);
-        mShowTitle = extras.getString(ShowsGridActivity.EXTRA_SHOW_TITLE);
-        mShowRating = extras.getDouble(ShowsGridActivity.EXTRA_SHOW_RATING);
-        mShowScreenshot = extras.getString(ShowsGridActivity.EXTRA_SHOW_SCREENSHOT);
+        mTitle = extras.getString(ShowsGridActivity.EXTRA_SHOW_TITLE);
+        mRating = extras.getDouble(ShowsGridActivity.EXTRA_SHOW_RATING);
+        mScreenshot = extras.getString(ShowsGridActivity.EXTRA_SHOW_SCREENSHOT);
+        mOverview = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_SUMMARY);
+        mStatus = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_STATUS);
+        mYear = extras.getLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR);
+        mCountry = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY);
+        mLanguage = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE);
+        mGenres = extras.getStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES);
     }
 
     private void displayShow() {
-        ((TextView) findViewById(R.id.show_details_rating)).setText(mShowRating.toString());
+        ((TextView) findViewById(R.id.show_details_rating)).setText(mRating.toString());
         Glide
                 .with(this)
-                .load(mShowScreenshot)
+                .load(mScreenshot)
                 .placeholder(R.drawable.highlight_placeholder)
                 .centerCrop()
                 .into((ImageView) findViewById(R.id.show_screenshot));
@@ -90,7 +101,7 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
         if (mFavorite == null) {
             mFab.setImageResource(R.drawable.show_details_favorite_on);
             mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
-            mFavorite = new Favorite(mShow, mShowTitle);
+            mFavorite = new Favorite(mShow, mTitle);
             mDao.save(mFavorite);
         } else {
             mFab.setImageResource(R.drawable.show_details_favorite_off);

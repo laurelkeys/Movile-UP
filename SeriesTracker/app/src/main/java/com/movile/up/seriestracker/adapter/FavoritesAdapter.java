@@ -44,9 +44,6 @@ public class FavoritesAdapter extends CursorAdapter {
             @Override
             public void onClick(View v) {
                 mClickListener.onFavoritesClick(entity.slug()); // FIXME
-                // mClickListener.onFavoritesClick(
-                //                     (Show) getIntent().getExtras().get(
-                //                                     ShowsGridActivity.EXTRA_SHOW_MODEL));
             }
         });
 

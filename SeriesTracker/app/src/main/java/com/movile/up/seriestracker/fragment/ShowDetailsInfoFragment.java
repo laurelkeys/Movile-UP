@@ -47,13 +47,14 @@ public class ShowDetailsInfoFragment extends Fragment {
     }
 
     private void displayShowInfo() {
-        ((TextView) mView.findViewById(R.id.show_details_overview)).setText(mShowSummary.toString());
+        ((TextView) mView.findViewById(R.id.show_details_overview)).setText(mShowSummary);
         String technicalInfo;
         technicalInfo = "Status: " + mShowStatus +
                 "\nStarted in: " + mShowYear.toString() +
                 "\nCountry: " + mShowCountry +
                 "\nLanguage: " + mShowLanguage;
         ((TextView) mView.findViewById(R.id.show_details_technical_info)).setText(technicalInfo);
+        /*
         LinearLayout ll = (LinearLayout) mView.findViewById(R.id.show_details_genres);
         for(int i = 0; i < mShowGenres.length; ++i) {
             TextView tv = new TextView(mView.getContext());
@@ -61,5 +62,6 @@ public class ShowDetailsInfoFragment extends Fragment {
             ll.addView(tv);
             // FIXME
         }
+        */
     }
 }

@@ -35,7 +35,7 @@ public class ShowUpdateReceiver extends BroadcastReceiver {
         Log.d(TAG, mShowUpdate.message());
 
         Intent i = new Intent(mContext, ShowDetailsActivity.class);
-        i.putExtra(ShowDetailsActivity.EXTRA_SHOW, mShowUpdate.show());
+        i.putExtra(ShowsGridActivity.EXTRA_SHOW, mShowUpdate.show());
         i.putExtra(ShowsGridActivity.EXTRA_SHOW_TITLE, mShowUpdate.title());
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
