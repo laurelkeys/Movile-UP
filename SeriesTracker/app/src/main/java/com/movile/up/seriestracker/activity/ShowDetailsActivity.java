@@ -1,5 +1,9 @@
 package com.movile.up.seriestracker.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,16 +25,16 @@ import com.movile.up.seriestracker.model.Show;
 public class ShowDetailsActivity extends BaseNavigationToolbarActivity implements OnFavoriteClickListener {
 
     private Show mShowModel;
-    private String mShow;
-    private String mScreenshot;
-    private Double mRating;
-    private String mTitle;
-    private String mOverview;
-    private String mStatus;
-    private Long mYear;
-    private String mCountry;
-    private String mLanguage;
-    private String[] mGenres;
+    private String mShowSlug;
+    private String mShowScreenshot;
+    private Double mShowRating;
+    private String mShowTitle;
+    private String mShowOverview;
+    private String mShowStatus;
+    private Long mShowYear;
+    private String mShowCountry;
+    private String mShowLanguage;
+    private String[] mShowGenres;
     private FloatingActionButton mFab;
     private Favorite mFavorite;
     private FavoriteDAO mDao = new FavoriteDAO(this);
@@ -42,7 +46,7 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
         setContentView(R.layout.show_details_activity);
         configureToolbar();
         configureContentPager();
-        getSupportActionBar().setTitle(mTitle);
+        getSupportActionBar().setTitle(mShowTitle);
 
         displayShow();
 
@@ -54,7 +58,7 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
             }
         });
 
-        mFavorite = mDao.query(mShow);
+        mFavorite = mDao.query(mShowSlug);
         if (mFavorite == null) {
             mFab.setImageResource(R.drawable.show_details_favorite_off);
             mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_background_fifth));
@@ -68,29 +72,29 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
         extractInformationFromExtras();
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this,
-                mShow, mOverview, mStatus, mYear, mCountry, mLanguage, mGenres));
+                mShowSlug, mShowOverview, mShowStatus, mShowYear, mShowCountry, mShowLanguage, mShowGenres));
     }
 
     private void extractInformationFromExtras() {
         Bundle extras = getIntent().getExtras();
         // mShowModel= (Show) extras.get(ShowsGridActivity.EXTRA_SHOW_MODEL);
-        mShow = extras.getString(ShowsGridActivity.EXTRA_SHOW);
-        mTitle = extras.getString(ShowsGridActivity.EXTRA_SHOW_TITLE);
-        mRating = extras.getDouble(ShowsGridActivity.EXTRA_SHOW_RATING);
-        mScreenshot = extras.getString(ShowsGridActivity.EXTRA_SHOW_SCREENSHOT);
-        mOverview = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_SUMMARY);
-        mStatus = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_STATUS);
-        mYear = extras.getLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR);
-        mCountry = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY);
-        mLanguage = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE);
-        mGenres = extras.getStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES);
+        mShowSlug = extras.getString(ShowsGridActivity.EXTRA_SHOW);
+        mShowTitle = extras.getString(ShowsGridActivity.EXTRA_SHOW_TITLE);
+        mShowRating = extras.getDouble(ShowsGridActivity.EXTRA_SHOW_RATING);
+        mShowScreenshot = extras.getString(ShowsGridActivity.EXTRA_SHOW_SCREENSHOT);
+        mShowOverview = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_SUMMARY);
+        mShowStatus = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_STATUS);
+        mShowYear = extras.getLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR);
+        mShowCountry = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY);
+        mShowLanguage = extras.getString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE);
+        mShowGenres = extras.getStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES);
     }
 
     private void displayShow() {
-        ((TextView) findViewById(R.id.show_details_rating)).setText(mRating.toString());
+        ((TextView) findViewById(R.id.show_details_rating)).setText(mShowRating.toString());
         Glide
                 .with(this)
-                .load(mScreenshot)
+                .load(mShowScreenshot)
                 .placeholder(R.drawable.highlight_placeholder)
                 .centerCrop()
                 .into((ImageView) findViewById(R.id.show_screenshot));
@@ -98,16 +102,62 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
 
     @Override
     public void onFavoriteClick() {
-        if (mFavorite == null) {
-            mFab.setImageResource(R.drawable.show_details_favorite_on);
-            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
-            mFavorite = new Favorite(mShow, mTitle);
-            mDao.save(mFavorite);
-        } else {
-            mFab.setImageResource(R.drawable.show_details_favorite_off);
-            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_background_fifth));
-            mFavorite = null;
-            mDao.delete(mShow);
-        }
+        final ObjectAnimator scaleX = ObjectAnimator.ofFloat(mFab, "scaleX", 1, 0);
+        scaleX.setDuration(200);
+
+        final ObjectAnimator scaleY = ObjectAnimator.ofFloat(mFab, "scaleY", 1, 0);
+        scaleY.setDuration(200);
+
+        final ObjectAnimator rotation = ObjectAnimator.ofFloat(mFab, "rotation", 0f, 360f);
+        rotation.setDuration(200);
+
+        // AnimatorSet
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(rotation, scaleX, scaleY);
+        set.setDuration(400);
+        set.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (mFavorite == null) {
+                    mFab.setImageResource(R.drawable.show_details_favorite_on);
+                    mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
+                    mFavorite = new Favorite(mShowSlug, mShowTitle);
+                    mDao.save(mFavorite);
+                } else {
+                    mFab.setImageResource(R.drawable.show_details_favorite_off);
+                    mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_background_fifth));
+                    mFavorite = null;
+                    mDao.delete(mShowSlug);
+                }
+
+                final ObjectAnimator endedScaleX = ObjectAnimator.ofFloat(mFab, "scaleX", 0, 1);
+                endedScaleX.setDuration(200);
+                endedScaleX.start();
+
+                final ObjectAnimator endedScaleY = ObjectAnimator.ofFloat(mFab, "scaleY", 0, 1);
+                endedScaleY.setDuration(200);
+                endedScaleY.start();
+
+                final ObjectAnimator endedRotation = ObjectAnimator.ofFloat(mFab, "rotation", 0f, 360f);
+                endedRotation.setDuration(200);
+                endedRotation.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        set.start();
     }
 }

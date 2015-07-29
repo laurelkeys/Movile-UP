@@ -54,13 +54,12 @@ public class ShowsGridActivity extends BaseNavigationDrawerActivity implements S
         intent.putExtra(EXTRA_SHOW_TITLE, show.title());
         intent.putExtra(EXTRA_SHOW_RATING, show.rating());
         intent.putExtra(EXTRA_SHOW_SCREENSHOT, show.images().thumb().get("full"));
-        /*
+        intent.putExtra(EXTRA_SHOW_INFO_GENRES, show.genres()); // FIXME
         intent.putExtra(EXTRA_SHOW_INFO_SUMMARY, show.overview());
         intent.putExtra(EXTRA_SHOW_INFO_STATUS, show.status());
         intent.putExtra(EXTRA_SHOW_INFO_YEAR, show.year());
         intent.putExtra(EXTRA_SHOW_INFO_LANGUAGE, show.language());
         intent.putExtra(EXTRA_SHOW_INFO_COUNTRY, show.country());
-        */
         startActivity(intent);
     }
 }

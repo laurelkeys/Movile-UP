@@ -39,7 +39,7 @@ public class FavoritesFragment extends Fragment implements OnFavoritesListener, 
 
     @Override
     public void OnFavoritesSuccess(Cursor cursor) {
-        mAdapter.swapCursor(cursor);
+        mAdapter.changeCursor(cursor);
     }
 
     @Override
