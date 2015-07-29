@@ -17,36 +17,55 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public static final int POSITION_INFO_CONTENT = 0;
     public static final int POSITION_SEASON_CONTENT = 1;
-    public static final String EXTRA_SHOW = "show";
 
     private Show mShowModel;
-    private String mShow;
+    public String mShow;
+    private String mOverview;
+    private String mStatus;
+    private Long mYear;
+    private String mCountry;
+    private String mLanguage;
     private Context mContext;
+    private String[] mGenres;
 
+    /*
     public ViewPagerAdapter(FragmentManager fragmentManager, Context context, Show showModel) {
         super(fragmentManager);
         mContext = context;
         mShowModel = showModel;
         mShow = mShowModel.ids().slug();
+    }*/
+
+    public ViewPagerAdapter(FragmentManager manager, Context context, String show, String overview, String status, Long year, String country, String language, String[] genres) {
+        super(manager);
+        mContext = context;
+        mShow = show;
+        mOverview = overview;
+        mStatus = status;
+        mYear = year;
+        mCountry = country;
+        mLanguage = language;
+        mGenres = genres;
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == POSITION_INFO_CONTENT) {
             Bundle b = new Bundle();
-            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_SUMMARY, mShowModel.overview());
-            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_STATUS, mShowModel.status());
-            b.putLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR, mShowModel.year());
-            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE, mShowModel.language());
-            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY, mShowModel.country());
-            b.putStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES, mShowModel.genres());
+            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_SUMMARY, mOverview);
+            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_STATUS, mStatus);
+            b.putLong(ShowsGridActivity.EXTRA_SHOW_INFO_YEAR, mYear);
+            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_LANGUAGE, mLanguage);
+            b.putString(ShowsGridActivity.EXTRA_SHOW_INFO_COUNTRY, mCountry);
+            b.putStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES, mGenres);
+
             ShowDetailsInfoFragment fragment = new ShowDetailsInfoFragment();
             fragment.setArguments(b);
             return fragment;
         }
         if (position == POSITION_SEASON_CONTENT) {
             Bundle b = new Bundle();
-            b.putString(EXTRA_SHOW, mShow);
+            b.putString(ShowsGridActivity.EXTRA_SHOW, mShow);
             ShowDetailsSeasonFragment fragment = new ShowDetailsSeasonFragment();
             fragment.setArguments(b);
             return fragment;
