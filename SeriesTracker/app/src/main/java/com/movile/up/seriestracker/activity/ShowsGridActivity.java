@@ -27,7 +27,6 @@ public class ShowsGridActivity extends BaseNavigationDrawerActivity implements S
     public static final String EXTRA_SHOW_INFO_LANGUAGE = "language";
     public static final String EXTRA_SHOW_INFO_COUNTRY = "country";
     public static final String EXTRA_SHOW_INFO_GENRES = "genres";
-    public static final String EXTRA_FIRST_AIRED = "first-aired";
     private ShowsGridAdapter mAdapter;
 
     @Override

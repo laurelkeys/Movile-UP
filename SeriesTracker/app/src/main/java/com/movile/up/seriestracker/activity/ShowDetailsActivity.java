@@ -8,7 +8,9 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,11 +39,40 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
     private String[] mShowGenres;
     private FloatingActionButton mFab;
     private Favorite mFavorite;
+    private ViewPager mViewPager;
     private FavoriteDAO mDao = new FavoriteDAO(this);
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.show_details_activity);
+        configureToolbar();
+        configureContentPager();
+        getSupportActionBar().setTitle(mShowTitle);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.show_details_tab_layout);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        displayShow();
+
+        mFab = (FloatingActionButton) findViewById(R.id.show_details_favorite);
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFavoriteClick();
+            }
+        });
+
+        mFavorite = mDao.query(mShowSlug);
+        if (mFavorite == null) {
+            mFab.setImageResource(R.drawable.show_details_favorite_off);
+            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_background_fifth));
+        } else {
+            mFab.setImageResource(R.drawable.show_details_favorite_on);
+            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
+        }
+        /*
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_details_activity);
         configureToolbar();
@@ -66,12 +97,13 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
             mFab.setImageResource(R.drawable.show_details_favorite_on);
             mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
         }
+        */
     }
 
     private void configureContentPager() {
         extractInformationFromExtras();
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this,
+        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this,
                 mShowSlug, mShowOverview, mShowStatus, mShowYear, mShowCountry, mShowLanguage, mShowGenres));
     }
 
