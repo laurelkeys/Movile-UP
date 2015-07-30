@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/show_details_overview"
-                        android:text="Summary."
+                        android:text=""
                         android:textSize="@dimen/default_textSize_medium"
                         android:textColor="@color/default_textColor_fourth" />
                 </LinearLayout>
@@ -78,14 +78,6 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/show_details_genres"
                         android:orientation="horizontal" >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/show_information_genre"
-                            android:gravity="center"
-                            android:text="genre"
-                            android:textSize="@dimen/default_textSize_verySmall"
-                            android:textColor="@color/default_textColor_first"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -119,7 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/show_details_technical_info"
-                        android:text="Status: \nStarted in: \nCountry: \nLanguage: "
+                        android:text="Status: \n\nStarted in: \n\nCountry: \n\nLanguage: "
                         android:textSize="@dimen/default_textSize_medium"
                         android:textColor="@color/default_textColor_fourth" />
                 </LinearLayout>

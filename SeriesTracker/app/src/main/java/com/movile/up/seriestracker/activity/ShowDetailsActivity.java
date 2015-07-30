@@ -72,32 +72,6 @@ public class ShowDetailsActivity extends BaseNavigationToolbarActivity implement
             mFab.setImageResource(R.drawable.show_details_favorite_on);
             mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
         }
-        /*
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.show_details_activity);
-        configureToolbar();
-        configureContentPager();
-        getSupportActionBar().setTitle(mShowTitle);
-
-        displayShow();
-
-        mFab = (FloatingActionButton) findViewById(R.id.show_details_favorite);
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFavoriteClick();
-            }
-        });
-
-        mFavorite = mDao.query(mShowSlug);
-        if (mFavorite == null) {
-            mFab.setImageResource(R.drawable.show_details_favorite_off);
-            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_background_fifth));
-        } else {
-            mFab.setImageResource(R.drawable.show_details_favorite_on);
-            mFab.setBackgroundTintList(getResources().getColorStateList(R.color.default_color_second));
-        }
-        */
     }
 
     private void configureContentPager() {
