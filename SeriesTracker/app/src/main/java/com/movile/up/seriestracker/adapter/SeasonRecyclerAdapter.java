@@ -15,12 +15,12 @@ import com.movile.up.seriestracker.model.Season;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class SeasonRecyclerAdapter extends RecyclerView.Adapter<SeasonRecyclerAdapter.ViewHolder> {
     private Context mContext;
     private List<Season> mSeasons;
     private OnSeasonClickListener mClickListener;
 
-    public RecyclerAdapter(Context context, OnSeasonClickListener clickListener) {
+    public SeasonRecyclerAdapter(Context context, OnSeasonClickListener clickListener) {
         mContext =  context;
         mClickListener = clickListener;
     }

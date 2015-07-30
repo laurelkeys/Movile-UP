@@ -1,21 +1,22 @@
 package com.movile.up.seriestracker.fragment;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.TypedValue;
-import android.view.Gravity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.movile.up.seriestracker.R;
 import com.movile.up.seriestracker.activity.ShowsGridActivity;
+import com.movile.up.seriestracker.adapter.InfoRecyclerAdapter;
+import com.movile.up.seriestracker.adapter.SeasonRecyclerAdapter;
+import com.movile.up.seriestracker.interfaces.view.ShowDetailsInfoView;
 
-public class ShowDetailsInfoFragment extends Fragment {
+public class ShowDetailsInfoFragment extends Fragment implements ShowDetailsInfoView {
 
     private String mShowSummary;
     private String mShowStatus;
@@ -24,6 +25,7 @@ public class ShowDetailsInfoFragment extends Fragment {
     private String mShowCountry;
     private String[] mShowGenres;
     private View mView;
+    private InfoRecyclerAdapter mAdapter;
 
     @Nullable
     @Override
@@ -36,7 +38,17 @@ public class ShowDetailsInfoFragment extends Fragment {
     public void onStart() {
         super.onStart();
         extractInformationFromExtras();
+        configureRecyclerView();
         displayShowInfo();
+        // displayGenres(mShowGenres); // FIXME
+    }
+
+    private void configureRecyclerView() {
+        RecyclerView view = (RecyclerView) mView.findViewById(R.id.show_details_genres_recycler);
+        view.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        mAdapter = new InfoRecyclerAdapter(this.getActivity());
+        view.setAdapter(mAdapter);
     }
 
     private void extractInformationFromExtras() {
@@ -49,6 +61,7 @@ public class ShowDetailsInfoFragment extends Fragment {
         mShowGenres = b.getStringArray(ShowsGridActivity.EXTRA_SHOW_INFO_GENRES);
     }
 
+
     private void displayShowInfo() {
         extractInformationFromExtras();
         ((TextView) mView.findViewById(R.id.show_details_overview)).setText(mShowSummary);
@@ -59,7 +72,7 @@ public class ShowDetailsInfoFragment extends Fragment {
                 "\n\nCountry: " + mShowCountry +
                 "\n\nLanguage: " + mShowLanguage;
         ((TextView) mView.findViewById(R.id.show_details_technical_info)).setText(technicalInfo);
-
+        /*
         LinearLayout ll = (LinearLayout) mView.findViewById(R.id.show_details_genres);
         for(int i = 0; i < mShowGenres.length; ++i) {
             TextView tv = new TextView(mView.getContext());
@@ -74,5 +87,11 @@ public class ShowDetailsInfoFragment extends Fragment {
             tv.setLayoutParams(llp);
             ll.addView(tv);
         }
+        */
+    }
+
+    @Override
+    public void displayGenres(String[] genres) {
+        mAdapter.updateContents(genres);
     }
 }

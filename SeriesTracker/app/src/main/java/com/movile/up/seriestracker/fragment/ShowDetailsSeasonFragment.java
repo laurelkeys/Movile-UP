@@ -11,17 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.movile.up.seriestracker.R;
-import com.movile.up.seriestracker.activity.EpisodeDetailsActivity;
 import com.movile.up.seriestracker.activity.SeasonDetailsActivity;
-import com.movile.up.seriestracker.adapter.RecyclerAdapter;
+import com.movile.up.seriestracker.adapter.SeasonRecyclerAdapter;
 import com.movile.up.seriestracker.interfaces.listener.OnSeasonClickListener;
-import com.movile.up.seriestracker.interfaces.view.ShowDetailsView;
+import com.movile.up.seriestracker.interfaces.view.ShowDetailsSeasonView;
 import com.movile.up.seriestracker.model.Season;
 import com.movile.up.seriestracker.presenter.ShowDetailsPresenter;
 
 import java.util.List;
 
-public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsView, OnSeasonClickListener {
+public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsSeasonView, OnSeasonClickListener {
 
     //private static final String TAG = EpisodeDetailsActivity.class.getSimpleName();
     private static final String EXTRA_SHOW = "show";
@@ -31,7 +30,7 @@ public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsVi
     private static final String EXTRA_THUMB = "thumb";
     private String mShow;
     private View mView;
-    private RecyclerAdapter mAdapter;
+    private SeasonRecyclerAdapter mAdapter;
 
     @Nullable
     @Override
@@ -53,7 +52,7 @@ public class ShowDetailsSeasonFragment extends Fragment implements ShowDetailsVi
         RecyclerView view = (RecyclerView) mView.findViewById(R.id.season_horizontal_recycler);
         view.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        mAdapter = new RecyclerAdapter(this.getActivity(), this);
+        mAdapter = new SeasonRecyclerAdapter(this.getActivity(), this);
         view.setAdapter(mAdapter);
     }
 

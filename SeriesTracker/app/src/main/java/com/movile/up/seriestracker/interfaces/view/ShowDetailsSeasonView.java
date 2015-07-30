@@ -4,6 +4,6 @@ import com.movile.up.seriestracker.model.Season;
 
 import java.util.List;
 
-public interface ShowDetailsView {
+public interface ShowDetailsSeasonView {
     void displaySeasons(List<Season> seasons);
 }

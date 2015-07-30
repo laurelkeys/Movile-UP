@@ -77,7 +77,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/show_details_genres"
-                        android:orientation="horizontal" >
+                        android:orientation="vertical" >
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/show_details_genres_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="horizontal"
+                            style="@style/AppTheme.Linear.Horizontal.Recycler" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
