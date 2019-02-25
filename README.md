@@ -12,4 +12,4 @@ An app that provides series' information, seasons and episodes, and sends notifi
 - [DBFlow](https://github.com/agrosner/DBFlow)
 - & much more
 
-[](https://github.com/laurelkeys/movile-up/blob/master/screens-preview.png)
+![](https://github.com/laurelkeys/movile-up/blob/master/screens-preview.png)
